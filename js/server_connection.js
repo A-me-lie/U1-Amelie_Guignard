@@ -14,6 +14,10 @@
 async function fetch_handler(request) {
     let response = await fetch(request);
 
+    if (response.status === 200 && login_page === true) {
+        display_quiz();
+    }
+
     console.log(response);
     return response;
 

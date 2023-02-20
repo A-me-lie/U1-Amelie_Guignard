@@ -6,25 +6,24 @@ let quiz_activator = false
 //display_quiz tömmer register_login och 
 
 function display_quiz() {
-
-
-
-
     content.innerHTML = ``;
-    content.innerHTML = `
-    // <div id="user_name_display>
-    // <p></p><button id="logout">logout</button>
-    //  <img src="" alt=""> create element
+
+    let img = document.createElement("img");
+    content.appendChild(img);
+    img.setAttribute("src", "media/logo.png");
+    img.classList.add("dog_img");
+
+
+
+    content.innerHTML += `
     <button></button>
     <button></button>
     <button></button>
     <button></button>
 
-</div>
-
-    
-    
+</div> 
     
     `;
 }
+
 
