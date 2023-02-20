@@ -21,17 +21,17 @@
 body {
     margin: 0;
     height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: rgb(150, 150, 137);
 }
 
-body>div {
-    padding: 15px;
+main {
     background-color: rgb(249, 249, 225);
     border-radius: 15px;
-    height: 540px;
+    height: 100vh;
+}
+
+header {
+    padding: 12px;
 }
 
 img {
@@ -51,5 +51,5 @@ footer {
     bottom: 0;
     color: black;
     font-size: 13px;
-    padding-bottom: 10px;
+    padding: 0 15px 15px 15px;
 }
