@@ -10,3 +10,11 @@
 // user_name: string, username to register
 // password: string, password to register
 // }
+
+async function fetch_handler(request) {
+    let response = await fetch(request);
+
+    console.log(response);
+    return response;
+
+}

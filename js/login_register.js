@@ -5,6 +5,31 @@ function login_handler() {
     let user_name_input = document.querySelector("input[name='un']").value;
     let user_password_input = document.querySelector("input[name='pw']").value;
 
+    let get_request = new Request(`${account_handler_prefix}?action=check_credentials&user_name=${user_name_input}&password=${user_password_input}`);
+
+    fetch_handler(get_request);
+}
+
+function register_handler() {
+    let user_name_input = document.querySelector("input[name='un']").value;
+    let user_password_input = document.querySelector("input[name='pw']").value;
+
+    let body = {
+
+        action: "register",
+        user_name: user_name_input,
+        password: user_password_input,
+
+    }
+
+    let options = {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json; charset=UTF=8" },
+    }
+
+    let post_request = new Request(account_handler_prefix, options);
+    fetch_handler(post_request)
 
 }
 
@@ -31,21 +56,41 @@ function create_login_or_register(type, text, change_type_text) {
     </div>
     <div id="text">${text}</div>
 
-    <button>${type}</button>
+    <button id="action">${type}</button>
 
     <p id="change_type">${change_type_text}</p>
 `;
 
+    let change_type = document.querySelector("#change_type");
+    change_type.addEventListener("click", change_type_handler)
+
+    function change_type_handler() {
+        if (login_page === true) {
+            create_login_or_register("REGISTER", "Ready when you are...", "Already have an account?Go to login");
+        }
+        else if (register_page === true) {
+            create_login_or_register("LOGIN", "Let the magic start!", "New to this?Register for free");
+
+        }
+    }
+
+    let button = document.querySelector("#action");
+
     if (type === "LOGIN") {
         login_page = true
         register_page = false
+
+        button.addEventListener("click", login_handler);
     }
-    else {
+    else if (type === "REGISTER") {
         register_page = true
         login_page = false
+
+        button.addEventListener("click", register_handler);
     }
 }
 
 create_login_or_register("LOGIN", "Let the magic start!", "New to this?Register for free");
+
 
 

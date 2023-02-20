@@ -17,7 +17,9 @@ h1 {
     margin-bottom: 60px;
 }
 
-
+#action {
+    width: 87vw;
+}
 
 label {
     margin-bottom: 5px;
