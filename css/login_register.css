@@ -1,15 +1,19 @@
 section {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 #change_type {
     text-align: center;
+    text-decoration: underline;
 }
 
 #text {
     text-align: center;
+    font-size: 12px;
 }
 
 h1 {
@@ -19,6 +23,11 @@ h1 {
 
 #action {
     width: 87vw;
+    border: none;
+    height: 40px;
+    color: black;
+    border-radius: 5px;
+    margin: 12px 0 70px 0;
 }
 
 label {
@@ -28,10 +37,24 @@ label {
 input {
     margin-bottom: 5px;
     width: 85vw;
+    background-color: #00b7ff;
+    color: black;
+    border-radius: 2px;
+    border: none;
+    font-size: 15px;
+    padding: 3px;
 }
 
 
 
 #password {
     margin-left: 10px;
+}
+
+#input_field {
+    margin-left: 11px;
+}
+
+#bottom {
+    margin-bottom: 12px;
 }

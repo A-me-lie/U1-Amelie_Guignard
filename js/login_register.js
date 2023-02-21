@@ -8,6 +8,10 @@ function login_handler() {
     let get_request = new Request(`${account_handler_prefix}?action=check_credentials&user_name=${user_name_input}&password=${user_password_input}`);
 
     fetch_handler(get_request);
+
+    if (login_ok === true) {
+        display_quiz(user_name_input);
+    }
 }
 
 function register_handler() {
@@ -51,7 +55,7 @@ function create_login_or_register(type, text, change_type_text) {
         <input type="text" name="un" >
 
         <label for="password">Password:</label>
-        <input type="password"  name="pw">
+        <input type="password"  name="pw" id="bottom">
 
     </div>
     <div id="text">${text}</div>
@@ -76,17 +80,25 @@ function create_login_or_register(type, text, change_type_text) {
 
     let button = document.querySelector("#action");
 
+    function change_backgroundColor(color) {
+        document.body.style.background = color;
+    }
+
     if (type === "LOGIN") {
-        login_page = true
-        register_page = false
+        login_page = true;
+        register_page = false;
 
         button.addEventListener("click", login_handler);
+
+        change_backgroundColor("rgb(209, 229, 220)");
     }
     else if (type === "REGISTER") {
-        register_page = true
-        login_page = false
+        register_page = true;
+        login_page = false;
+
 
         button.addEventListener("click", register_handler);
+        change_backgroundColor("rgb(214, 222, 222)");
     }
 }
 

@@ -21,16 +21,20 @@
 body {
     margin: 0;
     height: 100vh;
-    background-color: rgb(150, 150, 137);
+    background-color: rgb(209, 229, 220);
 }
 
 main {
-    background-color: rgb(249, 249, 225);
+
     border-radius: 15px;
-    height: 100vh;
+    height: 100%;
 }
 
 header {
+    padding: 12px;
+}
+
+section {
     padding: 12px;
 }
 
