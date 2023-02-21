@@ -13,7 +13,10 @@ section {
 
 #text {
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
+    width: 82vw;
+    border-radius: 2px;
+    padding: 8px;
 }
 
 h1 {
@@ -37,15 +40,17 @@ label {
 input {
     margin-bottom: 5px;
     width: 85vw;
-    background-color: #00b7ff;
+    background-color: rgb(121, 220, 201);
     color: black;
     border-radius: 2px;
     border: none;
     font-size: 15px;
-    padding: 3px;
+    padding: 4px;
 }
 
-
+input:focus {
+    background-color: rgb(121, 220, 201);
+}
 
 #password {
     margin-left: 10px;

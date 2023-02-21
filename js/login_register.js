@@ -1,16 +1,16 @@
 "use strict";
 
-function login_handler() {
+async function login_handler() {
 
     let user_name_input = document.querySelector("input[name='un']").value;
     let user_password_input = document.querySelector("input[name='pw']").value;
 
     let get_request = new Request(`${account_handler_prefix}?action=check_credentials&user_name=${user_name_input}&password=${user_password_input}`);
 
-    fetch_handler(get_request);
+    await fetch_handler(get_request);
 
     if (login_ok === true) {
-        display_quiz(user_name_input);
+        await display_quiz(user_name_input);
     }
 }
 

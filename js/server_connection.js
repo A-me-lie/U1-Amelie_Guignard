@@ -20,6 +20,18 @@ async function fetch_handler(request) {
         login_ok = true
     }
 
+    else if (response.status === 418) {
+        // teapot
+    }
+
+    else if (response.status === 400 || response.status === 404) {
+        //wrong password/user
+        let text = document.querySelector("#text");
+        text.style.backgroundColor = "#e9e9ed";
+        text.textContent = "Wrong user name or password"
+
+    }
+
     console.log(response);
     return response;
 
