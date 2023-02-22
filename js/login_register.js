@@ -10,6 +10,7 @@ async function login_handler() {
     await fetch_handler(get_request);
 
     if (login_ok === true) {
+        localStorage.setItem("connected_user", user_name_input);
         await display_quiz(user_name_input);
     }
 }
@@ -101,8 +102,6 @@ function create_login_or_register(type, text, change_type_text) {
         change_backgroundColor("rgb(214, 222, 222)");
     }
 }
-
-create_login_or_register("LOGIN", "Let the magic start!", "New to this?Register for free");
 
 
 

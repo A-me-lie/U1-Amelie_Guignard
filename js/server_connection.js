@@ -36,3 +36,7 @@ async function fetch_handler(request) {
     return response;
 
 }
+
+function show_message() {
+    // tar emot meassage text, close_message_text
+}
