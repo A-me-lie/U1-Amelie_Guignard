@@ -1,0 +1,13 @@
+.message {
+    color: black;
+    background-color: white;
+    position: absolute;
+    top: 250px;
+    padding: 20px 5px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

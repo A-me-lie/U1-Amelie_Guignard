@@ -11,7 +11,7 @@ async function login_handler() {
 
     if (login_ok === true) {
         localStorage.setItem("connected_user", user_name_input);
-        await display_quiz(user_name_input);
+        display_quiz(user_name_input);
     }
 }
 
@@ -34,7 +34,16 @@ function register_handler() {
     }
 
     let post_request = new Request(account_handler_prefix, options);
-    fetch_handler(post_request)
+    // await fetch_handler(post_request)
+    register_ok = true
+
+    if (register_ok === true) {
+        console.log("you are registered");
+        message_popup("Register Complete.Please proceed to login", true);
+
+    }
+
+
 
 }
 

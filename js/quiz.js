@@ -1,6 +1,7 @@
 "use strict";
 
-let quiz_activator = false
+let quiz_activator = false;
+let quiz_time = false;
 
 //när du får status 200 då ska quiz_activator vara lika med true
 //display_quiz tömmer register_login och 
