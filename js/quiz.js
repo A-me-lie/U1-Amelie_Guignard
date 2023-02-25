@@ -12,7 +12,7 @@ function display_quiz(user) {
     content.innerHTML = `
     <div id="display_user">
         <p class="user">${user}</p>
-        <button>logout</button>
+        <button id="logout">logout</button>
     </div>
     `;
 
