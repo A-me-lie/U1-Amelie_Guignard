@@ -7,15 +7,21 @@ async function login_handler() {
 
     let get_request = new Request(`${account_handler_prefix}?action=check_credentials&user_name=${user_name_input}&password=${user_password_input}`);
 
-    await fetch_handler(get_request);
+    let response = await fetch_handler(get_request);
 
-    if (login_ok === true) {
+    if (response.status === 200) {
         localStorage.setItem("connected_user", user_name_input);
         display_quiz(user_name_input);
     }
+    else if (response.status === 400 || response.status === 404) {
+        //wrong password/user
+        let text = document.querySelector("#text");
+        text.style.backgroundColor = "#e9e9ed";
+        text.textContent = "Wrong user name or password"
+    }
 }
 
-function register_handler() {
+async function register_handler() {
     let user_name_input = document.querySelector("input[name='un']").value;
     let user_password_input = document.querySelector("input[name='pw']").value;
 
@@ -34,13 +40,14 @@ function register_handler() {
     }
 
     let post_request = new Request(account_handler_prefix, options);
-    // await fetch_handler(post_request)
-    register_ok = true
+    let response = await fetch_handler(post_request)
 
-    if (register_ok === true) {
+    if (response.status === 200) {
         console.log("you are registered");
         message_popup("Register Complete. Please proceed to login", true);
-
+    }
+    else if (response.status === 400 || response.status === 409) {
+        message_popup("Sorry, that name is taken. Please try with another one.", true)
     }
 }
 
