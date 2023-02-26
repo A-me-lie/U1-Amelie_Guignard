@@ -100,10 +100,10 @@ function quiz_popup(correct, button_clicked) {
     close_button.textContent = "ONE MORE";
 
     if (correct) {
-        message.style.backgroundColor = "green";
+        message.style.backgroundColor = "#90c857";
         message.textContent = "CORRECT!";
     } else {
-        message.style.backgroundColor = "red"
+        message.style.backgroundColor = "#fb795b"
         message.textContent = "I'm afraid not...:-("
     }
 
