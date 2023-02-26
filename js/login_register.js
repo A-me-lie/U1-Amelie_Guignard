@@ -7,7 +7,9 @@ async function login_handler() {
 
     let get_request = new Request(`${account_handler_prefix}?action=check_credentials&user_name=${user_name_input}&password=${user_password_input}`);
 
+    message_popup("Contacting server...", false);
     let response = await fetch_handler(get_request);
+    remove_message()
 
     if (response.status === 200) {
         localStorage.setItem("connected_user", user_name_input);
@@ -18,6 +20,10 @@ async function login_handler() {
         let text = document.querySelector("#text");
         text.style.backgroundColor = "#e9e9ed";
         text.textContent = "Wrong user name or password"
+    }
+    else if (response.status === 418) {
+        // teapot
+        message_popup("The server thinks its not a teapot!", true)
     }
 }
 
@@ -40,7 +46,9 @@ async function register_handler() {
     }
 
     let post_request = new Request(account_handler_prefix, options);
+    message_popup("Contacting server...", false);
     let response = await fetch_handler(post_request)
+    remove_message();
 
     if (response.status === 200) {
         console.log("you are registered");
@@ -48,6 +56,10 @@ async function register_handler() {
     }
     else if (response.status === 400 || response.status === 409) {
         message_popup("Sorry, that name is taken. Please try with another one.", true)
+    }
+    else if (response.status === 418) {
+        // teapot
+        message_popup("The server thinks its not a teapot!", true)
     }
 }
 

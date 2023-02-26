@@ -1,11 +1,5 @@
 "use strict";
 
-let quiz_activator = false;
-let quiz_time = false;
-
-//när du får status 200 då ska quiz_activator vara lika med true
-//display_quiz tömmer register_login och 
-
 function display_quiz(user) {
     console.log(localStorage.getItem("connected_user"));
     content.innerHTML = ``;
@@ -28,35 +22,103 @@ function display_quiz(user) {
     section.appendChild(dog_image);
     dog_image.setAttribute("id", "dog_img");
     dog_image.setAttribute("src", "media/logo.png");
-    dog_image.classList.add("placeholder");
+    dog_image.classList.add("dog_img");
 
-    content.innerHTML += `
-    <div id="container">
-    <button class="answer"></button>
-    <button class="answer"></button>
-    <button class="answer"></button>
-    <button class="answer"></button>
-    </div> 
-    `;
+    let container = document.createElement("div");
+    container.classList.add("container")
+    section.appendChild(container);
+
+    let option_1 = document.createElement("button")
+    option_1.classList.add("option", "option_1")
+    container.appendChild(option_1);
+
+    let option_2 = document.createElement("button")
+    option_2.classList.add("option", "option_2")
+    container.appendChild(option_2);
+
+    let option_3 = document.createElement("button")
+    option_3.classList.add("option", "option_3")
+    container.appendChild(option_3);
+
+    let option_4 = document.createElement("button")
+    option_4.classList.add("option", "option_4")
+    container.appendChild(option_4);
 
     document.querySelector("#display_user > button").addEventListener("click", logout_button);
-
     show_next_question();
 }
 
 async function show_next_question() {
-    var breed = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)]
+    const correct_breed = get_random_breed()
+    console.log("correct breed=" + correct_breed.name)
 
-    // let prefix = get_image_prefix(ALL_BREEDS[correct_breed].url);
-    // let response = await fetch_handler(prefix);
-    // let resource = await response.json();
-    // await dog_image.setAttribute("src", resource.message);
-
-    let url = get_random_breed_image(breed.url);
+    let url = get_random_breed_image(correct_breed.url);
+    message_popup("Getting random picture...")
     let response = await fetch_handler(url);
     let resource = await response.json();
-
+    remove_message();
     let img = document.getElementById("dog_img").src = resource.message;
+
+    const number_of_options = 4;
+    let options = [];
+    let random_position_for_correct = Math.floor(Math.random() * number_of_options)
+    console.log("random_position_for_correct=" + random_position_for_correct)
+
+    for (let i = 0; i < number_of_options; i++) {
+        let breed;
+        if (i == random_position_for_correct) {
+            breed = correct_breed;
+        } else {
+            breed = get_random_breed();
+        }
+        options.splice(i, 0, breed)
+        let option = document.getElementsByClassName("option_" + (i + 1))[0];
+        option.textContent = breed.name;
+        option.addEventListener("click", () => {
+            console.log("Clicked on=" + options[i].name);
+            quiz_popup(correct_breed === options[i]);
+        });
+    }
+
+    console.log(options)
 }
 
+function get_random_breed() {
+    return ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)]
+}
 
+function quiz_popup(correct, button_clicked) {
+    let message_background = document.querySelector("#message_background");
+    message_background.style.display = "block"
+    message_background.classList.add("background")
+
+    let message = document.querySelector("#message");
+    message.style.display = "block";
+    message.classList.add("quiz_message")
+
+    let close_button = document.createElement("button");
+    close_button.textContent = "ONE MORE";
+
+    if (correct) {
+        message.style.backgroundColor = "green";
+        message.textContent = "CORRECT!";
+    } else {
+        message.style.backgroundColor = "red"
+        message.textContent = "I'm afraid not...:-("
+    }
+
+    message.appendChild(close_button);
+    close_button.addEventListener("click", button_clicked)
+
+    function button_clicked() {
+        remove_quiz_popup();
+        show_next_question();
+    }
+}
+
+function remove_quiz_popup() {
+    message.style.display = "none";
+    message.classList.remove("quiz_message");
+    message_background.style.display = "none";
+    message_background.classList.remove("background")
+}

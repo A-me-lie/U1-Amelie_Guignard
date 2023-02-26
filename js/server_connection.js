@@ -12,15 +12,7 @@
 // }
 
 async function fetch_handler(request) {
-    message_popup("Contacting server...", false);
     let response = await fetch(request);
-    remove_message();
-
-    if (response.status === 418) {
-        // teapot
-        message_popup("The server thinks its not a teapot!", true)
-    }
-
     console.log(response);
     return response;
 }
@@ -39,35 +31,22 @@ function message_popup(message_content, show_close_button) {
         let close_button = document.createElement("button");
         close_button.textContent = "CLOSE";
         message.appendChild(close_button);
-        close_button.addEventListener("click", button_clicked)
-
+        close_button.addEventListener("click", (button_clicked))
+        function button_clicked() {
+            remove_message();
+        }
     }
     else {
         message.classList.add("message")
     }
-    function button_clicked(e) {
-
-        console.log("hej");
-        if (quiz_time === true) {
-
-            remove_message();
-
-            let last_login = JSON.parse(localStorage.getItem("connected_user"))
-            display_quiz(last_login.user_name);
-
-        }
-        else {
-            console.log("remove button")
-            remove_message();
-        }
-    }
 }
 function remove_message() {
     message.style.display = "none";
+    message.classList.remove("message_with_button");
     message.classList.remove("message");
-
     message_background.style.display = "none";
-    message_background.classList.remove("background")
+    message_background.classList.remove("background");
+
     //message.innerHTML = "";
     //message_background.innerHTML = "";
 }
