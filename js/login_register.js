@@ -39,12 +39,9 @@ function register_handler() {
 
     if (register_ok === true) {
         console.log("you are registered");
-        message_popup("Register Complete.Please proceed to login", true);
+        message_popup("Register Complete. Please proceed to login", true);
 
     }
-
-
-
 }
 
 

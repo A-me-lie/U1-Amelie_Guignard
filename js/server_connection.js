@@ -15,7 +15,12 @@ let login_ok = false;
 let register_ok = false;
 
 async function fetch_handler(request) {
+
+    message_popup("Contacting server...", false);
+
     let response = await fetch(request);
+
+    remove_message();
 
     if (response.status === 200) {
         if (login_page === true) {
@@ -29,6 +34,7 @@ async function fetch_handler(request) {
 
     else if (response.status === 418) {
         // teapot
+        message_popup("The server thinks its not a teapot!", true)
 
     }
 
@@ -49,7 +55,7 @@ function message_popup(message_content, show_close_button) {
 
     let message = document.querySelector("#message");
     message.textContent = message_content;
-    message.classList.add("message")
+
 
     if (show_close_button === true) {
         console.log("created button");
@@ -57,8 +63,11 @@ function message_popup(message_content, show_close_button) {
         close_button.textContent = "CLOSE";
         message.appendChild(close_button);
         close_button.addEventListener("click", button_clicked)
+        message.classList.add("message_with_button")
     }
-
+    else {
+        message.classList.add("message")
+    }
     function button_clicked(e) {
 
         console.log("hej");
@@ -78,36 +87,4 @@ function message_popup(message_content, show_close_button) {
 function remove_message() {
     message.classList.remove("message");
     message.innerHTML = "";
-
 }
-// tar emot message text, close_message_text
-// function show_message(message_text, close_message_text) {
-//     let message = document.getElementById("#message");
-//     message.textContent = message_text;
-
-//     if (message_text === "Contacting Server..." || message_text === "Getting a random image") {
-//         return;
-//     }
-
-//     let close_message_button = document.createElement("button");
-//     close_message_button.textContent = close_message_text;
-//     close_message_button.classList.add("close_button");
-//     message.appendChild(close_message_button);
-
-//     close_message_button.addEventListener("click", button_clicked)
-
-//     if (message_text === "Correct") {
-//         message.style.backgroundColor = "lime";
-//     }
-//     else {
-//         message.style.backgroundColor = "red";
-//     }
-
-
-
-
-// }
-
-// function remove_message() {
-
-// }

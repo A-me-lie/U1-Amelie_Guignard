@@ -1,13 +1,25 @@
-.message {
+.message_with_button {
     color: black;
     background-color: white;
     position: absolute;
-    top: 250px;
-    padding: 20px 5px;
+    top: 191px;
+    padding: 20px 20px 15px 20px;
     text-align: center;
+    margin: 0 0 0 19.5px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border-radius: 0 0 10px 10px;
+
+    width: 226px;
+
+}
+
+button {
+    width: 200px;
+    padding: 8px 4px 8px 4px;
+    margin-top: 10px;
 }
