@@ -69,7 +69,7 @@ async function show_next_question() {
         if (i == random_position_for_correct) {
             breed = correct_breed;
         } else {
-            breed = get_random_breed();
+            breed = get_random_unique_breed(options, correct_breed);
         }
         options.splice(i, 0, breed)
         let option = document.getElementsByClassName("option_" + (i + 1))[0];
@@ -85,6 +85,18 @@ async function show_next_question() {
 
 function get_random_breed() {
     return ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)]
+}
+
+function get_random_unique_breed(options, correct_breed) {
+    let breed = get_random_breed();
+    console.log("random breed=" + breed.name);
+    if (options.includes(breed) || breed === correct_breed) {
+        console.log("    already in options or same as correct breed");
+        return get_random_unique_breed(options, correct_breed);
+    } else {
+        console.log("return unique breed=" + breed.name);
+        return breed;
+    }
 }
 
 function quiz_popup(correct, button_clicked) {
